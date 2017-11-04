@@ -1,0 +1,15 @@
+﻿name: NewLoginSystem
+main: itsu.mcpe.NewLoginSystem.core.NewLoginSystem
+version: 1.0.0
+api: ["1.0.0"]
+author: Itsu
+load: POSTWORLD
+description: "NewLoginSystem for Minecraft BedLock Edition"
+
+commands:
+
+   nls:
+    description: "NewLoginSystem OP設定画面を開く"
+    usage: "/nls"
+    permission: nls
+    permission-message: You don't have <permisson>

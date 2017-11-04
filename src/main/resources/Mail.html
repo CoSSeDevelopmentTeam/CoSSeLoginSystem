@@ -1,0 +1,32 @@
+<!--
+    アカウント登録完了通知用htmlメール
+
+    文字コード
+    UTF-8
+
+    変数
+    #SERVER_NAME# サーバー名
+    #PASSWORD# ログインパスワード
+    #USER_NAME# ユーザー名
+    #TEXT_1# プログラムから送られてくる文章(必ず入れてください)
+-->
+
+<html>
+    <head>
+        <style type = "text/css">
+            h1 {
+                padding: .5em .75em;
+                background-color: #f6f6f6;
+                border-radius: 6px;
+                text-align: center;
+            }
+        </style>
+    <head>
+
+    <body>
+        <h1>#SERVER_NAME#</h1>
+        <p>#TEXT_1#</p>
+        <p>パスワード: #PASSWORD#</p>
+        <p>ユーザー名: #USERNAME#</p>
+    </body>
+</html>

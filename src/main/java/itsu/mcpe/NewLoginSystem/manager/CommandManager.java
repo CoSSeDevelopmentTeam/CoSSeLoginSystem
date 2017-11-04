@@ -1,0 +1,128 @@
+package itsu.mcpe.NewLoginSystem.manager;
+
+import java.util.List;
+import java.util.Random;
+
+import cn.nukkit.Player;
+import cn.nukkit.command.Command;
+import cn.nukkit.command.CommandSender;
+import cn.nukkit.command.ConsoleCommandSender;
+import cn.nukkit.utils.TextFormat;
+import itsu.mcpe.NewLoginSystem.core.NewLoginSystem;
+import itsu.mcpe.NewLoginSystem.core.SQLSystem;
+
+public class CommandManager {
+
+    private NewLoginSystem plugin;
+    private WindowManager manager;
+    private SQLSystem sql;
+
+    private int id;
+    private List<String> players;
+
+    public CommandManager(NewLoginSystem plugin) {
+        this.plugin = plugin;
+        this.manager = plugin.getWindowManager();
+        this.sql = plugin.getSQLSystem();
+    }
+
+    public boolean processCommand(CommandSender sender, Command command, String label, String[] args) {
+        switch(command.getName()) {
+
+            case "nls":
+            	
+            	if(args[0] == null) {
+            		
+	                if(sender instanceof ConsoleCommandSender) {
+	                    sender.sendMessage(TextFormat.RED + "[NewLoginSystem] ゲーム内から実行してください。");
+	                    return true;
+	                }
+	
+	                Player p = (Player) sender;
+	
+	                if(!p.isOp()) {
+	                    sender.sendMessage(TextFormat.RED + "[NewLoginSystem] このコマンドはOPのみ使用できます。");
+	                    return true;
+	                }
+	
+	                id = new Random().nextInt(10000);
+	                players = manager.sendAdminWindow(p, id);
+	                return true;
+	                
+            	} else if(args[0].equals("ban")) {
+            		
+            		Player p = (Player) sender;
+            		boolean pardon = false;
+            		
+            		if(!p.isOp()) {
+	                    sender.sendMessage(TextFormat.RED + "[NewLoginSystem] このコマンドはOPのみ使用できます。");
+	                    return true;
+	                }
+            		
+            		if(args[1] == null) {
+            			sender.sendMessage(TextFormat.RED + "[NewLoginSystem] BANする人を入力してください。");
+	                    return true;
+            		}
+            		
+            		if(args[2] == null) {
+            			pardon = false;
+            			
+            		} else if(args[2].equals("p")) {
+            			pardon = true;
+            			
+            		}
+            		
+            		if(plugin.getServer().getPlayer(args[1]) != null || plugin.getServer().getOfflinePlayer(args[1]) != null) {
+
+                        if(!sql.existsBAN(args[1])) { //BANされていなかったら
+
+                            if(pardon) { //解除だったら
+
+                                p.sendMessage(TextFormat.RED + "[NewLoginSystem] " + args[1] + "はBAN(NLS)されていません。");
+
+                            } else { //解除しないだったら
+
+                                sql.createBAN(args[1], plugin.getServer().getPlayer(args[1]).getAddress() + plugin.getServer().getPlayer(args[1]).getClientId());
+                                p.sendMessage(TextFormat.GREEN + "[NewLoginSystem] " + args[1] + "をBAN(NLS)しました。");
+                                plugin.getServer().getPlayer(args[1]).kick("[NewLoginSystem] あなたはBAN(NLS)されました。", false);
+
+                            }
+
+                        } else if(sql.existsBAN(args[1]) && pardon) { //BANされていて解除だったら
+
+                            if(sql.deleteBAN(args[1])) { //BAN解除を試みる
+
+                                p.sendMessage(TextFormat.GREEN + "[NewLoginSystem] " + args[1] + "のBAN(NLS)を解除しました。");
+
+                            } else { //BANされていない
+
+                                p.sendMessage(TextFormat.RED + "[NewLoginSystem] " + args[1] + "はBAN(NLS)されていません。");
+                            }
+
+
+                        } else { //すでにBANされていたら
+
+                            p.sendMessage(TextFormat.RED + "[NewLoginSystem] すでにBAN(NLS)されています。");
+                        }
+
+
+                    } else { //サーバーにその名前の人がいなかったら
+
+                        p.sendMessage(TextFormat.RED + "[NewLoginSystem] 指定されたプレイヤーは存在しません。");
+
+                    }
+            		
+            	}
+        }
+        return true;
+    }
+
+    public int getWindowId() {
+        return id;
+    }
+
+    public List<String> getPlayers() {
+        return players;
+    }
+
+}
