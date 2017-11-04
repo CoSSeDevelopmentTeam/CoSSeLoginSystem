@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>new.login.system</groupId>
-  <artifactId>NewLoginSystem</artifactId>
+  <groupId>cosse.login.system</groupId>
+  <artifactId>CoSSeLoginSystem</artifactId>
   <version>Build-0.1</version>
 
-  <name>NewLoginSystem</name>
-  <description>NewLoginSystem for Minecraft BedLockEngine Edition</description>
+  <name>CosseLoginSystem</name>
+  <description>CoSSeLoginSystem for CosmoSunriseServer (Original: NewLoginSystem for Jupiter developed by Itsu)</description>
 
   <repositories>
       <repository>
