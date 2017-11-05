@@ -18,6 +18,7 @@ public class CommandManager {
     private SQLSystem sql;
 
     private int id;
+    private int settingId;
     private List<String> players;
 
     public CommandManager(NewLoginSystem plugin) {
@@ -118,6 +119,12 @@ public class CommandManager {
 
                     }
 
+                } else if(args[0].equals("setting")) {
+                	Player p = (Player) sender;
+                	
+                	settingId = new Random().nextInt(10000);
+                	
+                	manager.sendSettingWindow(p, settingId);
                 }
         }
         return true;
@@ -125,6 +132,10 @@ public class CommandManager {
 
     public int getWindowId() {
         return id;
+    }
+    
+    public int getSettingWindowId() {
+        return settingId;
     }
 
     public List<String> getPlayers() {

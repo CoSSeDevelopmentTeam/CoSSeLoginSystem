@@ -231,6 +231,125 @@ public class WindowListener implements Listener{
 			            }
         		}
         	});
+        	
+        } else if(e.getFormId() == command.getSettingWindowId()) {
+        	
+        	Map<Integer, Object> data = e.getWindow().getResponses();
+            String menu = (String) data.get(2);
+            String area = (String) data.get(3);
+            String pass = (String) data.get(4);
+            boolean auto = (boolean) data.get(5);
+            int autoInt;
+            
+            if(auto) autoInt = 0;
+            else autoInt = 1;
+            
+            switch(menu) {
+            
+            	case "サーバー/CoSSeLoginSystemの情報を見る":
+            		manager.sendModalWindow(p, "CoSSeLoginSystem サーバー/CoSSeLoginSystem情報", 
+            				TextFormat.GREEN + plugin.getServer().getMotd() + "\n" + 
+            				TextFormat.WHITE + "オンライン人数: " + plugin.getServer().getOnlinePlayers().values().size() + "\n" + 
+            				TextFormat.WHITE + "サーバーソフト: " + "Jupiter\n" + 
+            				TextFormat.GREEN + "CoSSeLoginSystem\n" + 
+            				TextFormat.GRAY + "Re-write from NewLoginSystem for Jupiter\n" + 
+            				TextFormat.WHITE + "開発: Itsu\n" + 
+            				TextFormat.WHITE + "CoSSe向け改変: popkechupki\n"
+            				, new Random().nextInt(10000));
+            		
+                    if(auto) autoInt = 0;
+                    else autoInt = 1;
+                    
+                    sql.updateAutoLogin(p.getName(), autoInt);
+                    
+            		break;
+            		
+            	case "登録情報の確認":
+            		String temp = "";
+            		
+            		if(sql.getAutoLogin(p.getName()) == 0) temp = "有効";
+            		else temp = "無効";
+            		
+            		manager.sendModalWindow(p, "CoSSeLoginSystem 登録情報確認", 
+            				TextFormat.GREEN + plugin.getServer().getMotd() + "\n" + 
+            				TextFormat.WHITE + "メールアドレス: " + sql.getMail(p.getName()) + "\n" + 
+            				TextFormat.WHITE + "パスワード: " + sql.getPassword(p.getName()) + "\n" + 
+            				TextFormat.WHITE + "自動ログイン: " + temp
+            				, new Random().nextInt(10000));
+            		
+                    if(auto) autoInt = 0;
+                    else autoInt = 1;
+                    
+                    sql.updateAutoLogin(p.getName(), autoInt);
+                    
+            		break;
+            		
+            	case "メールアドレスの変更":
+            		if(pass.equals(sql.getPassword(p.getName()))) {
+            			if(!area.equals(sql.getMail(p.getName()))) {
+            				p.sendMessage(TextFormat.GREEN + "[CoSSeLoginSystem] メールアドレスを更新しました。: " + area);
+            				
+            			} else {
+            				p.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] 登録されたメールアドレスと同じです。");
+            			}
+            			
+            		} else {
+            			p.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] パスワードが違います。");
+            		}
+            		
+                    if(auto) autoInt = 0;
+                    else autoInt = 1;
+                    
+                    sql.updateAutoLogin(p.getName(), autoInt);
+            		
+            		break;
+            		
+            	case "パスワードの変更": 
+            		if(pass.equals(sql.getPassword(p.getName()))) {
+        				sql.updatePassword(p.getName(), area);
+        				p.sendMessage(TextFormat.GREEN + "[CoSSeLoginSystem] パスワードを更新しました。: " + area);
+        				
+        				if(plugin.allowMail()) {
+                        	mail.sendMail("パスワード変更", "パスワードを変更しました。", sql.getMail(p.getName()), pass, p.getName(), MailManager.TYPE_PASSWORD);
+            				p.sendMessage(TextFormat.GREEN + "[CoSSeLoginSystem] パスワードを登録したメールアドレス宛に送信しました。");
+        				}
+            		} else {
+            			p.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] パスワードが違います。");
+            		}
+            		
+                    if(auto) autoInt = 0;
+                    else autoInt = 1;
+                    
+                    sql.updateAutoLogin(p.getName(), autoInt);
+            		
+            		break;
+            		
+            	case "アカウントの削除":
+            		if(pass.equals(sql.getPassword(p.getName()))) {
+            			
+            			if(pass.equals(area)) {
+            				sql.updatePassword(p.getName(), area);
+            				if(plugin.allowMail()) {
+                            	mail.sendMail("アカウント削除", "アカウントを削除しました。", sql.getMail(p.getName()), pass, p.getName(), MailManager.TYPE_PASSWORD);
+                				p.kick("[CoSSeLoginSystem] アカウントを削除しました。");
+                				sql.deleteAccount(p.getName());
+                				
+            				} 
+            				
+            			} else {
+        					p.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] 入力されたパスワードが一致しません。");
+        				}
+            			
+            		} else {
+    					p.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] パスワードが違います。");
+    				}
+            		
+            		break;
+            		
+            	case "何もしない":
+            		break;
+            		
+            }
         }
     }
 

@@ -6,6 +6,7 @@ import java.util.List;
 import cn.nukkit.Player;
 import cn.nukkit.utils.TextFormat;
 import cn.nukkit.window.CustomFormWindow;
+import cn.nukkit.window.ModalFormWindow;
 import cn.nukkit.window.element.Dropdown;
 import cn.nukkit.window.element.Element;
 import cn.nukkit.window.element.Input;
@@ -61,10 +62,53 @@ public class WindowManager {
         }
 
         Element elements[] = {new Label(TextFormat.GREEN + motd), new Label("インプットとドロップダウン両方を選択した場合はインプットのほうが優先されます。"), new Input("名前", "", ""), new Dropdown("オンラインのプレイヤーから探す", data), new Toggle("BANを解除する")};
-        CustomFormWindow window = new CustomFormWindow(id, "CoSSeLoginSystem 設定画面[BAN with CLS]", elements);
+        CustomFormWindow window = new CustomFormWindow(id, "CoSSeLoginSystem BAN with CLS", elements);
         player.sendWindow(window);
 
         return data;
+    }
+    
+    public void sendSettingWindow(Player player, int id) {
+    	
+    	List<String> settings = new ArrayList<>();
+    	settings.add("サーバー/CoSSeLoginSystemの情報を見る");
+    	settings.add("登録情報の確認");
+    	settings.add("メールアドレスの変更");
+    	settings.add("パスワードの変更");
+    	settings.add("アカウントの削除");
+    	settings.add("何もしない");
+    	
+    	Element elements[] = {
+    			new Label(TextFormat.GREEN + motd), 
+    			new Label("アカウント設定"), 
+    			new Dropdown("メニュー", settings), 
+    			new Input("入力エリア", "", ""), 
+    			new Input("パスワード", "", ""), 
+    			new Toggle("次回からのログインを省略"), 
+    			new Label(TextFormat.YELLOW + "各種設定方法"), 
+    			new Label(TextFormat.AQUA + "サーバー/CoSSeLoginSystemの情報を見る"), 
+    			new Label(TextFormat.WHITE + "各種情報を確認します。"),
+    			new Label(TextFormat.AQUA + "登録情報の確認"), 
+    			new Label(TextFormat.WHITE + "あなたが登録している情報を確認します。"),
+    			new Label(TextFormat.AQUA + "メールアドレスの登録"), 
+    			new Label(TextFormat.WHITE + "メールアドレスを登録していない場合に登録できます。入力エリアにメールアドレス、パスワード欄にパスワードを入力してください。"),
+    			new Label(TextFormat.AQUA + "メールアドレスの変更"), 
+    			new Label(TextFormat.WHITE + "メールアドレスを登録している場合、登録しているメールアドレスを変更できます。入力エリアにメールアドレス、パスワード欄にパスワードを入力してください。"),
+    			new Label(TextFormat.AQUA + "パスワードの変更"), 
+    			new Label(TextFormat.WHITE + "パスワードを変更します。入力エリアに新しいパスワード、パスワード欄に古いパスワードを入力してください。"),
+    			new Label(TextFormat.AQUA + "アカウントの削除"), 
+    			new Label(TextFormat.WHITE + "アカウント削除(退会)をします。入力エリアにパスワード、パスワード欄にもパスワードを入力してください。この操作は取り消せません。操作完了後、サーバーからキックされます。"),
+    			new Label(TextFormat.AQUA + "何もしない"), 
+    			new Label(TextFormat.WHITE + "何もせずにウィンドウを閉じます。")
+    	};
+    	
+        CustomFormWindow window = new CustomFormWindow(id, "CoSSeLoginSystem アカウント設定", elements);
+        player.sendWindow(window);
+    }
+    
+    public void sendModalWindow(Player p, String title, String contents, int id) {
+    	ModalFormWindow window = new ModalFormWindow(id, title, contents, "閉じる", "閉じる");
+        p.sendWindow(window);
     }
 
 }

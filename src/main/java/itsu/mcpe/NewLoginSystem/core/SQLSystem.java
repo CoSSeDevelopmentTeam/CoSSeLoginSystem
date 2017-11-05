@@ -101,10 +101,24 @@ public class SQLSystem {
         return false;
     }
     
+    public synchronized boolean deleteAccount(String name) {
+        try {
+            if(existsAccount(name)) {
+                statement.executeUpdate("DELETE from player WHERE name = '"+ encoder.encodeToString(name.getBytes()) + "'");
+            } else {
+            	plugin.getServer().getPlayer(name).sendMessage(TextFormat.RED + "[CoSSeLoginSystem] アカウントがありません。");
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+    
     public synchronized boolean deleteBAN(String name) {
         try {
             if(existsAccount(name) && existsBAN(name)) {
-                statement.executeUpdate("DELETE from banplayer WHERE name = '"+ encoder.encodeToString(name.getBytes()) + "'");
+                statement1.executeUpdate("DELETE from banplayer WHERE name = '"+ encoder.encodeToString(name.getBytes()) + "'");
             } else {
             	plugin.getServer().getPlayer(name).sendMessage(TextFormat.RED + "[NewLoginSystem] その人はBANされていません。");
                 return false;
@@ -219,6 +233,16 @@ public class SQLSystem {
         if(existsAccount(name)){
             try {
                 statement.execute("update player set address = '" + encoder.encodeToString(address.getBytes()) + "' where name = '" + encoder.encodeToString(name.getBytes()) + "'");
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+    }
+    
+    public synchronized void updateMail(String name, String mail) {
+        if(existsAccount(name)){
+            try {
+                statement.execute("update player set mail = '" + encoder.encodeToString(mail.getBytes()) + "' where name = '" + encoder.encodeToString(name.getBytes()) + "'");
             } catch (SQLException e) {
                 System.err.println(e.getMessage());
             }
