@@ -40,13 +40,13 @@ public class WindowManager {
 				new Label("このプラグインは入力された個人情報をすべて暗号化して保存しています。また、アカウント削除時にはデータをすべて削除しています。ご不明な点がございましたら開発者(Itsu @itsu_dev)もしくはサーバー主までお問い合わせください。")
 		};
 		
-		CustomFormWindow window = new CustomFormWindow(id, "NewLoginSystem ログイン", elements);
+		CustomFormWindow window = new CustomFormWindow(id, "CoSSeLoginSystem ログイン", elements);
 		player.sendWindow(window);
 	}
 	
 	public void sendLoginWindow(Player player, int id, String text) {
 		Element elements[] = {new Label(TextFormat.GREEN + motd), new Label(text), new Input("パスワード(パスワードを忘れた場合は登録したメールアドレス)", "", ""), new Toggle("サーバーから出る")};
-		CustomFormWindow window = new CustomFormWindow(id, "NewLoginSystem ログイン", elements);
+		CustomFormWindow window = new CustomFormWindow(id, "CoSSeLoginSystem ログイン", elements);
 		player.sendWindow(window);
 	}
 	
@@ -58,7 +58,7 @@ public class WindowManager {
 		}
 		
 		Element elements[] = {new Label(TextFormat.GREEN + motd), new Label("インプットとドロップダウン両方を選択した場合はインプットのほうが優先されます。"), new Input("名前", "", ""), new Dropdown("オンラインのプレイヤーから探す", data), new Toggle("BANを解除する")};
-		CustomFormWindow window = new CustomFormWindow(id, "NewLoginSystem 設定画面[BAN with NLS]", elements);
+		CustomFormWindow window = new CustomFormWindow(id, "CoSSeLoginSystem 設定画面[BAN with NLS]", elements);
 		player.sendWindow(window);
 		
 		return data;

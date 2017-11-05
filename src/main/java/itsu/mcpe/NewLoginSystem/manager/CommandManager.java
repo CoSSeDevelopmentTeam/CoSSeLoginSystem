@@ -34,14 +34,14 @@ public class CommandManager {
             	if(args[0] == null) {
             		
 	                if(sender instanceof ConsoleCommandSender) {
-	                    sender.sendMessage(TextFormat.RED + "[NewLoginSystem] ゲーム内から実行してください。");
+	                    sender.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] ゲーム内から実行してください。");
 	                    return true;
 	                }
 	
 	                Player p = (Player) sender;
 	
 	                if(!p.isOp()) {
-	                    sender.sendMessage(TextFormat.RED + "[NewLoginSystem] このコマンドはOPのみ使用できます。");
+	                    sender.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] このコマンドはOPのみ使用できます。");
 	                    return true;
 	                }
 	
@@ -55,12 +55,12 @@ public class CommandManager {
             		boolean pardon = false;
             		
             		if(!p.isOp()) {
-	                    sender.sendMessage(TextFormat.RED + "[NewLoginSystem] このコマンドはOPのみ使用できます。");
+	                    sender.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] このコマンドはOPのみ使用できます。");
 	                    return true;
 	                }
             		
             		if(args[1] == null) {
-            			sender.sendMessage(TextFormat.RED + "[NewLoginSystem] BANする人を入力してください。");
+            			sender.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] BANする人を入力してください。");
 	                    return true;
             		}
             		
@@ -78,13 +78,13 @@ public class CommandManager {
 
                             if(pardon) { //解除だったら
 
-                                p.sendMessage(TextFormat.RED + "[NewLoginSystem] " + args[1] + "はBAN(NLS)されていません。");
+                                p.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] " + args[1] + "はBAN(CLS)されていません。");
 
                             } else { //解除しないだったら
 
                                 sql.createBAN(args[1], plugin.getServer().getPlayer(args[1]).getAddress() + plugin.getServer().getPlayer(args[1]).getClientId());
-                                p.sendMessage(TextFormat.GREEN + "[NewLoginSystem] " + args[1] + "をBAN(NLS)しました。");
-                                plugin.getServer().getPlayer(args[1]).kick("[NewLoginSystem] あなたはBAN(NLS)されました。", false);
+                                p.sendMessage(TextFormat.GREEN + "[CoSSeLoginSystem] " + args[1] + "をBAN(CLS)しました。");
+                                plugin.getServer().getPlayer(args[1]).kick("[CoSSeLoginSystem] あなたはBAN(CLS)されました。", false);
 
                             }
 
@@ -92,17 +92,17 @@ public class CommandManager {
 
                             if(sql.deleteBAN(args[1])) { //BAN解除を試みる
 
-                                p.sendMessage(TextFormat.GREEN + "[NewLoginSystem] " + args[1] + "のBAN(NLS)を解除しました。");
+                                p.sendMessage(TextFormat.GREEN + "[CoSSeLoginSystem] " + args[1] + "のBAN(CLS)を解除しました。");
 
                             } else { //BANされていない
 
-                                p.sendMessage(TextFormat.RED + "[NewLoginSystem] " + args[1] + "はBAN(NLS)されていません。");
+                                p.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] " + args[1] + "はBAN(CLS)されていません。");
                             }
 
 
                         } else { //すでにBANされていたら
 
-                            p.sendMessage(TextFormat.RED + "[NewLoginSystem] すでにBAN(NLS)されています。");
+                            p.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] すでにBAN(CLS)されています。");
                         }
 
 

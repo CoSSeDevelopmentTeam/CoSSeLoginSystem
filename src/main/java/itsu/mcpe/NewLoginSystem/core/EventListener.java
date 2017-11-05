@@ -45,7 +45,7 @@ public class EventListener implements cn.nukkit.event.Listener {
         String name = p.getName();
 
         if(sql.existsBAN(name)) {
-            p.kick("[NewLoginSystem] あなたはBAN(NLS)されています。", false);
+            p.kick("[CoSSeLoginSystem] あなたはBAN(CLS)されています。", false);
         }
     }
 
@@ -60,7 +60,7 @@ public class EventListener implements cn.nukkit.event.Listener {
                 if(sql.getAddress(name).equals(p.getAddress() + p.getLoginChainData().getClientId())) {
 
                     if(sql.getAutoLogin(name) == 0) {
-                        p.sendMessage(TextFormat.GREEN + "[NewLoginSystem] 自動ログインされました。");
+                        p.sendMessage(TextFormat.GREEN + "[CoSSeLoginSystem] 自動ログインされました。");
                         setLoggedIn(name, true);
                         sendingWindow = false;
 
@@ -90,7 +90,7 @@ public class EventListener implements cn.nukkit.event.Listener {
                         sendingWindow = true;
                         window.setType(TYPE_NEW);
                         e.setCancelled();
-                        manager.sendCreateWindow(p, windowId, "サーバーへようこそ！ログインをしてください。");
+                        manager.sendCreateWindow(p, windowId, "CoSSeへようこそ！ログインをしてください。");
                     }
             }
         }
@@ -106,7 +106,7 @@ public class EventListener implements cn.nukkit.event.Listener {
                 if(sql.getAddress(name).equals(p.getAddress() + p.getLoginChainData().getClientId())) {
 
                     if(sql.getAutoLogin(name) == 0) {
-                        p.sendMessage(TextFormat.GREEN + "[NewLoginSystem] 自動ログインされました。");
+                        p.sendMessage(TextFormat.GREEN + "[CoSSeLoginSystem] 自動ログインされました。");
                         setLoggedIn(name, true);
                         sendingWindow = false;
 
@@ -136,7 +136,7 @@ public class EventListener implements cn.nukkit.event.Listener {
                     sendingWindow = true;
                     window.setType(TYPE_NEW);
                     e.setCancelled();
-                    manager.sendCreateWindow(p, windowId, "サーバーへようこそ！ログインをしてください。");
+                    manager.sendCreateWindow(p, windowId, "CoSSeへようこそ！ログインをしてください。");
                 }
             }
         }

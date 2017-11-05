@@ -4,8 +4,8 @@
   <artifactId>CoSSeLoginSystem</artifactId>
   <version>Build-0.1</version>
 
-  <name>CosseLoginSystem</name>
-  <description>CoSSeLoginSystem for CosmoSunriseServer (Original: NewLoginSystem for Jupiter developed by Itsu)</description>
+  <name>CoSSeLoginSystem</name>
+  <description>CoSSeLoginSystem for CosmoSunriseServer (Original: CoSSeLoginSystem for Jupiter developed by Itsu)</description>
 
   <repositories>
       <repository>

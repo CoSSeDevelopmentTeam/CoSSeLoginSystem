@@ -80,16 +80,16 @@ public class WindowListener implements Listener{
                             l.setSendingWindow(false);
                             l.setLoggedIn(p.getName(), true);
 
-                            p.sendMessage(TextFormat.GREEN + "[NewLoginSystem] ログインに成功しました。");
+                            p.sendMessage(TextFormat.GREEN + "[CoSSeLoginSystem] ログインに成功しました。");
                             p.sendMessage(TextFormat.AQUA + "プレーヤー名: " + p.getName());
                             p.sendMessage(TextFormat.AQUA + "パスワード: " + password);
                             p.sendMessage(TextFormat.AQUA + "メールアドレス: " + address);
-                            p.sendMessage(TextFormat.RED + "[NewLoginSystem] 忘れないようにスクリーンショットをとることをお勧めします。");
+                            p.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] パスワードは忘れないようにしてください。");
 
                             if(plugin.allowMail() && !address.equals("null")) {
 
                                 mail.sendMail("アカウント作成完了のお知らせ", "アカウントを作成しました。", address, password, p.getName());
-                                p.sendMessage(TextFormat.GREEN + "[NewLoginSystem] 確認用メールが送信されました。");
+                                p.sendMessage(TextFormat.GREEN + "[CoSSeLoginSystem] 確認用メールが送信されました。");
 
                             }
 
@@ -104,7 +104,7 @@ public class WindowListener implements Listener{
                                 l.setSendingWindow(false);
                                 l.setLoggedIn(p.getName(), true);
 
-                                p.sendMessage(TextFormat.GREEN + "[NewLoginSystem] ログインに成功しました。");
+                                p.sendMessage(TextFormat.GREEN + "[CoSSeLoginSystem] ログインに成功しました。");
 
                             } else {
 
@@ -121,7 +121,7 @@ public class WindowListener implements Listener{
                             boolean leave = (boolean) data.get(3);
                             
                             if(leave) {
-                            	p.kick("[NewLoginSystem] サーバーから出るが選択されました。", false);
+                            	p.kick("[CoSSeLoginSystem] サーバーから出るが選択されました。", false);
                             	break;
                             }
 
@@ -130,7 +130,7 @@ public class WindowListener implements Listener{
                                 l.setSendingWindow(false);
                                 l.setLoggedIn(p.getName(), true);
 
-                                p.sendMessage(TextFormat.GREEN + "[NewLoginSystem] ログインに成功しました。");
+                                p.sendMessage(TextFormat.GREEN + "[CoSSeLoginSystem] ログインに成功しました。");
 
                             } else if(password.equals(sql.getMail(p.getName()))) {
 
@@ -140,7 +140,7 @@ public class WindowListener implements Listener{
                                 if(plugin.allowMail()) {
                                 	
                                 	mail.sendMail("パスワード確認", "パスワードお問い合わせの結果です。", password, sql.getPassword(p.getName()), p.getName());
-                                    p.kick("[NewLoginSystem] パスワードを登録したメールアドレス宛に送信しました。パスワードを確認した後、再度ログインしてください。", false);
+                                    p.kick("[CoSSeLoginSystem] パスワードを登録したメールアドレス宛に送信しました。パスワードを確認した後、再度ログインしてください。", false);
                                 
                                 } else {
                                 	
@@ -163,7 +163,7 @@ public class WindowListener implements Listener{
                             break;
 
                         default:
-                            p.sendMessage(TextFormat.RED + "[NewLoginSystem] ログインに失敗しました。");
+                            p.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] ログインに失敗しました。");
                             l.setSendingWindow(false);
                             l.setLoggedIn(p.getName(), false);
                             l.setWindowId(getRandom());
@@ -196,13 +196,13 @@ public class WindowListener implements Listener{
 			
 			                    if(pardon) { //解除だったら
 			
-			                        p.sendMessage(TextFormat.RED + "[NewLoginSystem] " + name + "はBAN(NLS)されていません。");
+			                        p.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] " + name + "はBAN(CLS)されていません。");
 			
 			                    } else { //解除しないだったら
 			
 			                        sql.createBAN(name, plugin.getServer().getPlayer(name).getAddress() + plugin.getServer().getPlayer(name).getClientId());
-			                        p.sendMessage(TextFormat.GREEN + "[NewLoginSystem] " + name + "をBAN(NLS)しました。");
-			                        plugin.getServer().getPlayer(name).kick("[NewLoginSystem] あなたはBAN(NLS)されました。", false);
+			                        p.sendMessage(TextFormat.GREEN + "[CoSSeLoginSystem] " + name + "をBAN(CLS)しました。");
+			                        plugin.getServer().getPlayer(name).kick("[CoSSeLoginSystem] あなたはBAN(CLS)されました。", false);
 			
 			                    }
 			
@@ -210,23 +210,23 @@ public class WindowListener implements Listener{
 			
 			                    if(sql.deleteBAN(name)) { //BAN解除を試みる
 			
-			                        p.sendMessage(TextFormat.GREEN + "[NewLoginSystem] " + name + "のBAN(NLS)を解除しました。");
+			                        p.sendMessage(TextFormat.GREEN + "[CoSSeLoginSystem] " + name + "のBAN(CLS)を解除しました。");
 			
 			                    } else { //BANされていない
 			
-			                        p.sendMessage(TextFormat.RED + "[NewLoginSystem] " + name + "はBAN(NLS)されていません。");
+			                        p.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] " + name + "はBAN(CLS)されていません。");
 			                    }
 			
 			
 			                } else { //すでにBANされていたら
 			
-			                    p.sendMessage(TextFormat.RED + "[NewLoginSystem] すでにBAN(NLS)されています。");
+			                    p.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] すでにBAN(CLS)されています。");
 			                }
 			
 			
 			            } else { //サーバーにその名前の人がいなかったら
 			
-			                p.sendMessage(TextFormat.RED + "[NewLoginSystem] 指定されたプレイヤーは存在しません。");
+			                p.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] 指定されたプレイヤーは存在しません。");
 			
 			            }
         		}
