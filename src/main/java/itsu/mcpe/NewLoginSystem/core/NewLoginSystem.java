@@ -19,7 +19,7 @@ import itsu.mcpe.NewLoginSystem.manager.WindowManager;
 public class NewLoginSystem extends PluginBase {
 
     /*public*/
-    public static final String PATH = "./plugins/NewLoginSystem/";
+    public static final String PATH = "./plugins/CoSSeLoginSystem/";
 
     /*Instance*/
     private static NewLoginSystem instance;
@@ -91,17 +91,8 @@ public class NewLoginSystem extends PluginBase {
 
         if(disable) {
 
-            getLogger().info(TextFormat.RED + "Config.ymlが./plugins/NewLoginManager/に作成されました。適宜設定を行って再起動を行ってください。");
+            getLogger().info(TextFormat.RED + "Config.ymlが./plugins/CoSSeLoginSystem/に作成されました。適宜設定を行って再起動を行ってください。");
             getServer().getPluginManager().disablePlugin(this);
-
-        } else {
-
-            getLogger().info(TextFormat.GREEN + "起動しました。");
-            getLogger().info(TextFormat.AQUA + "二次配布/改造は禁止です。");
-            getLogger().info(TextFormat.AQUA + "不具合/質問等ありましたらItsu(@itsu_dev)までお問い合わせください。");
-            getLogger().info(TextFormat.BLUE + "メール送信: " + TextFormat.RESET + sendMail);
-            getLogger().info(TextFormat.BLUE + "送信アドレス: " + TextFormat.RESET + address);
-            getLogger().info(TextFormat.BLUE + "パスワード: " + TextFormat.RESET + pass);
 
         }
 

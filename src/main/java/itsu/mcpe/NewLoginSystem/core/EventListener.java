@@ -45,7 +45,7 @@ public class EventListener implements cn.nukkit.event.Listener {
         String name = p.getName();
 
         if(sql.existsBAN(name)) {
-            p.kick("[CoSSeLoginSystem] あなたはBAN(NLS)されています。", false);
+            p.kick("[CoSSeLoginSystem] あなたはBAN(CLS)されています。", false);
         }
     }
 
