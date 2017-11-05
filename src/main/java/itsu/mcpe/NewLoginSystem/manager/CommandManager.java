@@ -30,49 +30,55 @@ public class CommandManager {
         switch(command.getName()) {
 
             case "nls":
-            	
-            	if(args[0] == null) {
-            		
-	                if(sender instanceof ConsoleCommandSender) {
-	                    sender.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] ゲーム内から実行してください。");
-	                    return true;
-	                }
-	
-	                Player p = (Player) sender;
-	
-	                if(!p.isOp()) {
-	                    sender.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] このコマンドはOPのみ使用できます。");
-	                    return true;
-	                }
-	
-	                id = new Random().nextInt(10000);
-	                players = manager.sendAdminWindow(p, id);
-	                return true;
-	                
-            	} else if(args[0].equals("ban")) {
-            		
-            		Player p = (Player) sender;
-            		boolean pardon = false;
-            		
-            		if(!p.isOp()) {
-	                    sender.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] このコマンドはOPのみ使用できます。");
-	                    return true;
-	                }
-            		
-            		if(args[1] == null) {
-            			sender.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] BANする人を入力してください。");
-	                    return true;
-            		}
-            		
-            		if(args[2] == null) {
-            			pardon = false;
-            			
-            		} else if(args[2].equals("p")) {
-            			pardon = true;
-            			
-            		}
-            		
-            		if(plugin.getServer().getPlayer(args[1]) != null || plugin.getServer().getOfflinePlayer(args[1]) != null) {
+
+                try{if(args[0] == null);}
+                catch(ArrayIndexOutOfBoundsException e){
+
+                    if(sender instanceof ConsoleCommandSender) {
+                        sender.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] ゲーム内から実行してください。");
+                        return true;
+                    }
+
+                    Player p = (Player) sender;
+
+                    if(!p.isOp()) {
+                        sender.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] このコマンドはOPのみ使用できます。");
+                        return true;
+                    }
+
+                    id = new Random().nextInt(10000);
+                    players = manager.sendAdminWindow(p, id);
+                    return true;
+
+                }
+
+                if(args[0].equals("ban")) {
+
+                    Player p = (Player) sender;
+                    boolean pardon = false;
+
+                    if(!p.isOp()) {
+                        sender.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] このコマンドはOPのみ使用できます。");
+                        return true;
+                    }
+
+                    try{if(args[1] == null);}
+                    catch(ArrayIndexOutOfBoundsException e){
+                        sender.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] BANする人を入力してください。");
+                        return true;
+                    }
+
+                    try{if(args[2] == null);}
+                    catch(ArrayIndexOutOfBoundsException e){
+                        pardon = false;
+
+                    }
+
+                    if(args[2].equals("p")) {
+                        pardon = true;
+                    }
+
+                    if(plugin.getServer().getPlayer(args[1]) != null || plugin.getServer().getOfflinePlayer(args[1]) != null) {
 
                         if(!sql.existsBAN(args[1])) { //BANされていなかったら
 
@@ -111,8 +117,8 @@ public class CommandManager {
                         p.sendMessage(TextFormat.RED + "[CoSSeLoginSystem] 指定されたプレイヤーは存在しません。");
 
                     }
-            		
-            	}
+
+                }
         }
         return true;
     }
