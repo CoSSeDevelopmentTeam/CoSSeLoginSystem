@@ -45,7 +45,7 @@ public class EventListener implements cn.nukkit.event.Listener {
         String name = p.getName();
 
         if(sql.existsBAN(name)) {
-            p.kick("[CoSSeLoginSystem] あなたはBAN(CLS)されています。", false);
+            p.kick("[CoSSeLoginSystem] あなたはBAN(NLS)されています。", false);
         }
     }
 
@@ -90,7 +90,7 @@ public class EventListener implements cn.nukkit.event.Listener {
                         sendingWindow = true;
                         window.setType(TYPE_NEW);
                         e.setCancelled();
-                        manager.sendCreateWindow(p, windowId, "CoSSeへようこそ！ログインをしてください。");
+                        manager.sendCreateWindow(p, windowId, "サーバーへようこそ！アカウント登録をしてください。");
                     }
             }
         }
@@ -136,7 +136,7 @@ public class EventListener implements cn.nukkit.event.Listener {
                     sendingWindow = true;
                     window.setType(TYPE_NEW);
                     e.setCancelled();
-                    manager.sendCreateWindow(p, windowId, "CoSSeへようこそ！ログインをしてください。");
+                    manager.sendCreateWindow(p, windowId, "サーバーへようこそ！ログインをしてください。");
                 }
             }
         }

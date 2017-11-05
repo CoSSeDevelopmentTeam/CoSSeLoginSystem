@@ -4,29 +4,176 @@
     文字コード
     UTF-8
 
-    変数
+     変数
     #SERVER_NAME# サーバー名
     #PASSWORD# ログインパスワード
     #USER_NAME# ユーザー名
     #TEXT_1# プログラムから送られてくる文章(必ず入れてください)
+    
+    編集は各自行ってください。
+    
+    
+    もしわからない場合は、
+    
+    <li><a href="#">サイト</a></li>
+    <li><a href="#">ヘルプ</a></li>
+    <li><a href="#">Twitter</a></li>
+    <li><a href="#">Discord</a></li>
+    
+    のコードの「#」の部分を横の対応する項目のリンクにすれば動作します。
+    また、下のほうに自由メッセージ欄があるのでそこも書き直していただけたらなと思います。
+    
+    Itsu
+    
 -->
 
 <html>
     <head>
         <style type = "text/css">
-            h1 {
+
+            h2 {
                 padding: .5em .75em;
-                background-color: #f6f6f6;
-                border-radius: 6px;
+                background-color: #212121;
+                color: #ffffff;
+                text-align: left;
+                margin-top: 0;
+                margin-bottom: 0
+            }
+
+            h3 {
+                border-bottom:2px solid #1A237E;
+                color: #212121;
                 text-align: center;
             }
+
+            p {
+                color: #212121
+            }
+
+            .center {
+                width: "100%";
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            h4#shirase {
+                padding: .5em .75em;
+                background-color: #212121;
+                color: #ffffff;
+                text-align: right;
+                margin-top: 0;
+                margin-bottom: 0
+            }
+
+            h4#normal {
+                border-left:10px solid #1A237E;
+                background-color: #212121;
+                color: #ffffff;
+                text-align: left;
+            }
+
+            h4#footer {
+                padding: .5em .75em;
+                background-color: #212121;
+                color: #ffffff;
+                text-align: center;
+                margin-top: 0;
+                margin-bottom: 0
+            }
+
+            #menu {
+                width: "100%";
+                padding: 0;
+                margin: 0;
+                list-style-type: none;
+                margin-top: 0;
+                margin-bottom: 0
+            }
+
+            #menu li {
+                width: 25%;
+                float: left;
+                padding: 0;
+                margin: 0;
+                text-align: center;
+            }
+
+            #menu li a {
+                width: auto;
+                color: #fff;
+                font-size: 12px;
+                font-weight: bold;
+                padding: 10px 0;
+                text-decoration: none;
+                display: block;
+                background: #283593;
+            }
+
+            #menu li a:hover {
+                background: #1A237E;
+            }
+
+            table.type {
+                border-collapse: collapse;
+                text-align: left;
+                line-height: 1.5;
+                border-top: 1px solid #212121;
+                width: 100%;
+            }
+
+            table.type th {
+                width: 40%;
+                padding: 10px;
+                font-weight: bold;
+                vertical-align: top;
+                color: #ffffff;
+                background-color: #212121;
+                border-right: 3px solid #283593;
+                border-bottom: 1px solid #212121;
+            }
+
+            table.type td {
+                width: 60%;
+                padding: 10px;
+                vertical-align: top;
+                border-right: 1px solid #212121;
+                border-bottom: 1px solid #212121;
+            }
+
         </style>
     <head>
 
     <body>
-        <h1>#SERVER_NAME#</h1>
-        <p>#TEXT_1#</p>
-        <p>パスワード: #PASSWORD#</p>
-        <p>ユーザー名: #USERNAME#</p>
+        <h2>#SERVER_NAME#</h2>
+
+            <ul id = "menu">
+                <li><a href="#">サイト</a></li>
+                <li><a href="#">ヘルプ</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Discord</a></li>
+            </ul>
+
+            <h4 id = "shirase">おしらせ: #TEXT_1#</h4>
+
+            <br>
+            <h4 id = "normal">ログイン情報</h4>
+
+            <table class="type">
+                <tr>
+                    <th scope="row">ユーザー名</th>
+                    <td>#USERNAME#</td>
+                </tr>
+                <tr>
+                    <th scope="row">パスワード</th>
+                    <td>#PASSWORD#</td>
+                </tr>
+            </table>
+
+            <br>
+            <p>今回は#SERVER_NAME#へ来ていただきありがとうございます。当サーバーは〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇です。</p>
+            <p>最後に、登録したパスワードを忘れないようにこのメールを保存もしくはスクショなどでとっておくことをお勧めします。万が一忘れた場合は、ログイン時のパスワード入力欄にメールアドレスを打っていただくとこのメールアドレス宛にパスワードが送られてきます。それを使ってログインしてください。</p>
+
+            <br>
+            <h4 id = "footer">このメールは自動送信のため返信できません。</h4>
     </body>
 </html>

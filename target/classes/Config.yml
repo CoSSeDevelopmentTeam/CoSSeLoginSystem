@@ -1,0 +1,89 @@
+#################
+#NewLoginSystem 設定#
+#################
+#メールの送信にはGMailの使用を推奨します。
+#他のアカウントでもできますが、プログラム自体がGMailに最適になっているためです。
+#詳細設定は下部にあります。
+
+#メールモードの使用
+sendMail: true
+
+#メールアドレス
+Address: MAIL_ADDRESS
+
+#アカウントパスワード
+Password: PASSWORD
+
+
+########################
+#アカウント登録完了メールの設定#
+########################
+
+#送信するメールソース
+Account-Mail: Mail.html
+
+#メールタイプ
+Account-MailType: text/html
+
+#エンコード
+Account-Encode: SHIFT_JIS
+
+
+######################
+#パスワード再送信メールの設定#
+######################
+
+#送信するメールソース
+Password-Mail: Mail.html
+
+#メールタイプ
+Password-MailType: text/html
+
+#エンコード
+Password-Encode: SHIFT_JIS
+
+
+###########
+#メールの設定#
+###########
+#上級者用の設定です。自信のない方はGMailで送りましょう。
+#設定を間違えるとメールが送れなくなることがあります。
+#アカウントによっては送れないことがあります。
+#初期設定ではGMail用の設定になっています。
+
+#デバッグ(trueもしくはfalse)
+Mail-Debug: false
+
+#SMTPホスト
+Smtp-Host: smtp.gmail.com
+
+#SMTPポート
+Smtp-Port: 465
+
+#SMTP接続タイムアウト(noneで無効)
+Smtp-ConnectionTimeout: 60000
+
+#SMTPタイムアウト(noneで無効)
+Smtp-Timeout: 60000
+
+#SMTP_Auth(trueもしくはfalse)
+Smtp-Auth: true
+
+#SMTPトランスポートプロトコル(noneで無効)
+Smtp-TransportProtocol: smtps
+
+#SMTP_Localhost(noneで無効)
+Smtp-Localhost: localhost
+
+#SMTP_SocketFactory_Class(noneで無効)
+Smtp-SocketFactory-Class: javax.net.ssl.SSLSocketFactory
+
+#SMTP_SocketFactory_Fallback(noneで無効)
+Smtp-SocketFactory-Fallback: false
+
+#SMTP_SocketFactory_Port(noneで無効)
+Smtp-SocketFactory-Port: 465
+
+#Session_Transport
+Session-Transport: smtps
+
