@@ -29,7 +29,7 @@ public class CommandManager {
     public boolean processCommand(CommandSender sender, Command command, String label, String[] args) {
         switch(command.getName()) {
 
-            case "nls":
+            case "cls":
 
                 try{if(args[0] == null);}
                 catch(ArrayIndexOutOfBoundsException e){
