@@ -6,6 +6,7 @@ import java.util.Random;
 
 import cn.nukkit.Player;
 import cn.nukkit.event.EventHandler;
+import cn.nukkit.event.block.BlockBreakEvent;
 import cn.nukkit.event.player.PlayerMessageEvent;
 import cn.nukkit.event.player.PlayerMoveEvent;
 import cn.nukkit.event.player.PlayerPreLoginEvent;
@@ -46,6 +47,53 @@ public class EventListener implements cn.nukkit.event.Listener {
 
         if(sql.existsBAN(name)) {
             p.kick("[CoSSeLoginSystem] あなたはBAN(CLS)されています。", false);
+        }
+    }
+    
+    @EventHandler
+    public void onBreak(BlockBreakEvent e) {
+        Player p = e.getPlayer();
+        String name = p.getName();
+
+        if(!isLoggedIn(name)) {
+            if(sql.existsAccount(name)) {
+
+                if(sql.getAddress(name).equals(p.getAddress() + p.getLoginChainData().getClientId())) {
+
+                    if(sql.getAutoLogin(name) == 0) {
+                        p.sendMessage(TextFormat.GREEN + "[CoSSeLoginSystem] 自動ログインされました。");
+                        setLoggedIn(name, true);
+                        sendingWindow = false;
+
+                    } else {
+                        if(!sendingWindow) {
+                            windowId = getRandom();
+                            sendingWindow = true;
+                            window.setType(TYPE_CHANGED_IP);
+                            e.setCancelled();
+                            manager.sendLoginWindow(p, windowId, "自動ログインをしない設定になっています。");
+                        }
+                    }
+
+                } else {
+                    if(!sendingWindow) {
+                        windowId = getRandom();
+                        sendingWindow = true;
+                        window.setType(TYPE_CHANGED_IP);
+                        e.setCancelled();
+                        manager.sendLoginWindow(p, windowId, "前回ログイン時と情報が変わりました。ログインをしてください。");
+                    }
+                }
+
+            } else {
+                    if(!sendingWindow) {
+                        windowId = getRandom();
+                        sendingWindow = true;
+                        window.setType(TYPE_NEW);
+                        e.setCancelled();
+                        manager.sendCreateWindow(p, windowId, "サーバーへようこそ！アカウント登録をしてください。");
+                    }
+            }
         }
     }
 

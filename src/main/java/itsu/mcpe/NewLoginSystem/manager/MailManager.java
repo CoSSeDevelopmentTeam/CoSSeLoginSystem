@@ -44,11 +44,11 @@ public class MailManager {
                       Properties props = System.getProperties();
 
                       props.setProperty("mail.debug", plugin.getMailDebug());
-                      
+
                       props.setProperty("mail.smtp.host", plugin.getSMTPHost());
                       props.setProperty("mail.smtp.port", plugin.getSMTPPort());
                       props.setProperty("mail.smtp.auth", plugin.getSMTPAuth());
-                      
+
                       props.setProperty("mail.smtp.user", manager.address);
                       props.setProperty("mail.smtp.password", manager.password);
 
@@ -85,7 +85,7 @@ public class MailManager {
 
                       msg.setFrom(new InternetAddress(address, plugin.getServer().getMotd()));
                       msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toAddress));
-                      msg.setSubject(new String(title.getBytes("MS932"), "SHIFT_JIS"), "SHIFT_JIS");
+                      msg.setSubject(title);
                       msg.setSentDate(new Date());
 
                       Transport trans = null;
